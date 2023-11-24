@@ -1,0 +1,11 @@
+{
+  "short_name": "Lista de Tarefas",
+  "name": "Lista de Tarefas",
+  "icons": [
+    {
+      "src": "coreNotesIcon.png",
+      "type": "image/png",
+      "sizes": "36x36"
+    }
+  ]
+}
