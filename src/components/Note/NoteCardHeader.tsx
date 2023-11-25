@@ -1,17 +1,7 @@
 import React from 'react';
 import FavoriteNoteComponent from './FavoriteNoteComponent';
 import { Box, Tooltip, Typography } from '@mui/material';
-import { INote } from '../../ModelProps';
-
-interface INoteCardHeader {
-  isEditing: boolean;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  editedTitle: string;
-  onChange: (value: string) => void;
-  onConfirm: () => void;
-  onCancel: () => void;
-  note: INote;
-}
+import { INoteCardHeader } from '../../ModelProps';
 
 const style = {
   width: '85%',
@@ -36,9 +26,10 @@ const NoteCardHeader: React.FC<INoteCardHeader> = ({
     <Box
       display="flex"
       justifyContent="space-between"
-      sx={{padding: '10px 16px 5px 16px'}}
+      sx={{ padding: '10px 16px 5px 16px' }}
     >
       {isEditing ? (
+        // Input editável durante a edição
         <Typography
           component= 'input'
           maxLength={255}
@@ -53,8 +44,8 @@ const NoteCardHeader: React.FC<INoteCardHeader> = ({
           }}
           sx={style}
         />
-
       ) : (
+        // Texto não editável fora do modo de edição, com a opção de exibir uma tooltip
         <Tooltip title={editedTitle} arrow>
           <Typography
             component="input"

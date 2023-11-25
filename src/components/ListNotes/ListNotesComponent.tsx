@@ -15,15 +15,18 @@ const ListNotes: React.FC<IProps> = ({ search }) => {
   const [favoritesNotes, setFavoritesNotes] = useState<INote[]>([]);
   const [commonNotes, setCommonNotes] = useState<INote[]>([]);
 
+  // useEffect para buscar as notas ao montar o componente
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Obtém todas as notas da API
         const notes = await NoteService.getNotes();
 
         const all: INote[] = [];
         const favorites: INote[] = [];
         const commons: INote[] = [];
-        
+
+        // Classifica as notas em favoritas e comuns
         notes.forEach((note) => {
           all.push(note);
 
@@ -34,6 +37,7 @@ const ListNotes: React.FC<IProps> = ({ search }) => {
           }
         });
 
+        // Atualiza os estados com as notas classificadas
         setFavoritesNotes(favorites);
         setCommonNotes(commons);
         setAllNotes(all);
@@ -42,9 +46,11 @@ const ListNotes: React.FC<IProps> = ({ search }) => {
       }
     };
 
+    // Chama a função fetchData ao montar o componente
     fetchData();
   }, []);
 
+  // Filtra as notas com base na pesquisa (se houver)
   const filteredNotes = search
     ? allNotes.filter(
         (note) => note.title.includes(search) || note.description.includes(search)
@@ -52,7 +58,9 @@ const ListNotes: React.FC<IProps> = ({ search }) => {
     : null;
 
   return (
+    // Contêiner principal com layout flexível em coluna e espaçamento entre os filhos
     <Box display="flex" flexDirection="column" gap={5} width="90%" mb={5}>
+      {/* Renderiza o componente de pesquisa ou as notas favoritas e comuns */}
       {search ? (
         <SearchNotesComponent notes={filteredNotes || []} />
       ) : (

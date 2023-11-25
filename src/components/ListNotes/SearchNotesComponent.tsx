@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const SearchNotesComponent: React.FC<IProps> = ({ notes }) => {
+  // Obtém o tema atual para ajustar o layout responsivo
   const theme = useTheme();
 
   return (
@@ -16,6 +17,7 @@ const SearchNotesComponent: React.FC<IProps> = ({ notes }) => {
       flexDirection="column"
       flexWrap="wrap"
       sx={{
+        // Estilo responsivo para dispositivos menores
         [theme.breakpoints.down('sm')]: {
           alignItems: 'center',
         },
@@ -29,11 +31,13 @@ const SearchNotesComponent: React.FC<IProps> = ({ notes }) => {
         flexWrap="wrap"
         gap={5}
         sx={{
+          // Ajustes responsivos para dispositivos menores
           [theme.breakpoints.down('sm')]: {
             justifyContent: 'center',
           },
         }}
       >
+        {/* Mapeia e exibe cada nota no componente Note */}
         {notes.map((note) => (
           <Note key={note.id} note={note} />
         ))}

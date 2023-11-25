@@ -1,14 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-
-interface INoteCardContent {
-  isEditing: boolean;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  editedDescription: string;
-  onChange: (value: string) => void;
-  onConfirm: () => void;
-  onCancel: () => void;
-}
+import { INoteCardContent } from '../../ModelProps';
 
 const style = {
   width: '83%',
@@ -22,16 +14,17 @@ const style = {
 }
 
 const NoteCardContent: React.FC<INoteCardContent> = ({ 
-    isEditing,
-    setIsEditing,
-    editedDescription,
-    onChange,
-    onConfirm,
-    onCancel,
-  }) => {
+  isEditing,
+  setIsEditing,
+  editedDescription,
+  onChange,
+  onConfirm,
+  onCancel,
+}) => {
 
   return (
     <Box
+      // Área clicável para ativar a edição
       width="100%"
       height="73%"
       sx={{
@@ -40,6 +33,7 @@ const NoteCardContent: React.FC<INoteCardContent> = ({
       onClick={() => setIsEditing(true)}
     >
       {isEditing ? (
+        // Textarea editável durante a edição
         <Typography
           component= 'textarea'
           maxLength={255}
@@ -53,8 +47,9 @@ const NoteCardContent: React.FC<INoteCardContent> = ({
             }
           }}
           sx={style}
-      />
+        />
       ) : (
+        // Textarea somente leitura fora do modo de edição
         <Typography
           component="textarea"
           maxLength={255}

@@ -7,6 +7,7 @@ interface IProps {
 }
 
 export default function CommonNotesComponent({ notes }: IProps) {
+  // Obtém o tema atual para ajustar o layout responsivo
   const theme = useTheme();
 
   return (
@@ -15,6 +16,7 @@ export default function CommonNotesComponent({ notes }: IProps) {
       flexDirection="column"
       flexWrap="wrap"
       sx={{
+        // Estilo responsivo para dispositivos menores
         [theme.breakpoints.down('sm')]: {
           alignItems: 'center',
         },
@@ -28,11 +30,13 @@ export default function CommonNotesComponent({ notes }: IProps) {
         flexWrap="wrap"
         gap={5}
         sx={{
+          // Ajustes responsivos para dispositivos menores
           [theme.breakpoints.down('sm')]: {
             justifyContent: 'center',
           },
         }}
       >
+        {/* Mapeia e exibe cada nota não favorita no componente Note */}
         {notes.map((note) => (
           <Note key={note.id} note={note} />
         ))}

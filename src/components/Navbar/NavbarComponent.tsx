@@ -7,16 +7,19 @@ interface IProps {
 }
 
 export default function Navbar({ setSearch }: IProps) {
+  // Verifica se o dispositivo é móvel com base na largura da tela
   const isMobile = useMediaQuery('(max-width:800px)');
 
   return (
+    // Contêiner principal que envolve a barra de navegação
     <Box width="100%" pb={1.5} pt={1.5} boxShadow="0px 0px 3px 0px grey" sx={{ bgcolor: '#fff' }}>
+      {/* Container interno com flexbox, ajustado para layout responsivo */}
       <Box
         display="flex"
         flexDirection={isMobile ? 'column' : 'row'}
         alignItems={isMobile ? 'center' : 'flex-start'}
         justifyContent="flex-start"
-        px={5}
+        px={5} 
       >
         <Box
           display="flex"
@@ -27,9 +30,11 @@ export default function Navbar({ setSearch }: IProps) {
           <Typography variant="h6" sx={{ ml: 1 }}>CoreNotes</Typography>
         </Box>
 
+        {/* Campo de pesquisa com TextField */}
         <TextField
           sx={{
-            width: isMobile ? '100%' : '700px', outline: 'none'
+            width: isMobile ? '100%' : '700px',
+            outline: 'none'
           }}
           placeholder="Pesquisar Notas"
           size="small"

@@ -11,7 +11,12 @@ interface IProps {
   note: INote;
 }
 
-const fetchData = async (noteId: string, setEditedTitle: React.Dispatch<React.SetStateAction<string>>, setEditedDescription: React.Dispatch<React.SetStateAction<string>>) => {
+// Função de utilidade para buscar dados de uma nota e atualizar o estado
+const fetchData = async (
+  noteId: string,
+  setEditedTitle: React.Dispatch<React.SetStateAction<string>>,
+  setEditedDescription: React.Dispatch<React.SetStateAction<string>>
+) => {
   try {
     const response: AxiosResponse<INote> = await NoteService.getNote(noteId);
     const updatedNote: INote = response.data;
@@ -28,12 +33,14 @@ const NoteCard: React.FC<IProps> = ({ note }) => {
   const [editedTitle, setEditedTitle] = useState(note.title);
   const [editedDescription, setEditedDescription] = useState(note.description);
 
+  // Função para lidar com o cancelamento da edição
   const handleEditCancel = () => {
     setIsEditing(false);
     setEditedTitle(note.title);
     setEditedDescription(note.description);
   };
 
+  // Função para lidar com a confirmação da edição
   const handleEditConfirm = async () => {
     if (editedTitle && editedDescription) {
       await NoteService.update({
@@ -47,10 +54,12 @@ const NoteCard: React.FC<IProps> = ({ note }) => {
     }
   };
 
+  // Função de callback para a busca de dados, usando useCallback para evitar recriação desnecessária
   const fetchDataCallback = useCallback(() => {
     fetchData(note.id, setEditedTitle, setEditedDescription);
   }, [note.id]);
 
+  // useEffect para buscar dados ao carregar o componente ou ao encerrar a edição
   useEffect(() => {
     const fetchDataWrapper = async () => {
       if (!isEditing) {
@@ -63,6 +72,7 @@ const NoteCard: React.FC<IProps> = ({ note }) => {
 
   return (
     <Card sx={{ minWidth: 275, width: '25%', height: '500px', mt: 2, borderRadius: '25px', bgcolor: note.color, boxShadow: '1px 1px 5px 0px grey', cursor: 'pointer' }}>
+      {/* Componentes para renderizar o cabeçalho, conteúdo e ações da nota */}
       <NoteCardHeader
         isEditing={isEditing}
         setIsEditing={setIsEditing}
