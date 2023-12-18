@@ -39,13 +39,6 @@ const NoteCardContent: React.FC<INoteCardContent> = ({
           maxLength={255}
           value={editedDescription}
           onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              onConfirm();
-            } else if (e.key === 'Escape') {
-              onCancel();
-            }
-          }}
           sx={style}
         />
       ) : (
